@@ -3,6 +3,15 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \usepackage{graphicx}
+\usepackage{abstract}
+\usepackage{hyperref}
+\pagenumbering{arabic}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Pulisce tutti gli stili correnti
+\fancyfoot[C]{\thepage} % Posiziona il numero della pagina al centro del piè di pagina
 
 \geometry{
   top=1in,
@@ -17,8 +26,6 @@
   \begin{center}
     \includegraphics[width=0.8\textwidth]{OIP.jpg} % Sostituisci con il tuo logo dell'università
     \vspace{1cm}
-
-
 
     \textbf{\Large Department of Biological, Geological and Environmental Sciences Sciences and Management of Nature} \\
     \vspace{2cm}
@@ -37,5 +44,147 @@
     \textbf{\large Anno Accademico 2022-2023} \\
   \end{center}
 \end{titlepage}
+
+\newpage
+\vspace*{\fill}
+\newpage
+
+% Abstract
+\begin{abstract}
+Biodiversity and ecosystem health are intricately linked to the abundance and diversity of plants and insects, with bees playing a pivotal role as indicators of vitality and providers of ecosystem services in agricultural settings. However, the decline in plant and bee populations is attributed to global factors such as habitat loss, fragmentation, agricultural intensification, and climate change. The use of traditional, on-site methods to monitor these vital elements is often costly and time-consuming.\\
+This thesis aims to address this challenge by integrating advanced GIS tools, such as QGIS, with machine learning techniques. Through surveys of 30 grasslands in the southeast of the Netherlands, utilizing Sentinel-2 images, we achieved detailed habitat mapping. Focusing on bands with a spatial resolution of 10 m, including Blue, Green, Red, and NIR, we explored the application of machine learning techniques, particularly the Random Forest algorithm.\\
+The main objective was to distinguish between natural habitats, agricultural zones, and urban areas, assessing their impact on bee abundance and diversity. Accurate land cover classification is crucial for ecological studies, influencing the understanding of ecosystem health and pollinator abundance.\\
+Through the training of classification models on R Studio, we obtained a detailed segmentation of the study area. Accuracy analysis allowed further refinement of the models, ensuring reliable results. The findings provide a detailed overview of habitat distribution, contributing to the development of replicable approaches. The proposed integrated approach represents a significant step towards sustainable land management and biodiversity conservation.
+
+\end{abstract}
+
+% Resto del tuo documento
+
+\newpage
+\vspace*{\fill}
+\newpage
+
+% Indice
+\tableofcontents
+
+\newpage
+\vspace*{\fill}
+\newpage
+
+
+
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+The growing concern about the global decline of biodiversity, marked by species loss and ecosystem degradation, poses an urgent challenge with far-reaching implications. 
+This decline jeopardizes not only the long-term survival of numerous species but also undermines the invaluable benefits that humanity derives from functional ecosystems (Kleijn et al., 2015). Biodiversity plays a crucial role in providing essential ecosystem services, including pollination, nutrient cycling, water purification, carbon sequestration, and climate regulation (Diaz et al., 2001). In agricultural areas, this decline takes significant proportions, mainly due to habitat fragmentation\footnote{Habitat fragmentation is the process in which large, continuous areas of natural habitats are divided into smaller, isolated patches. This fragmentation typically occurs as a result of human activities such as urbanization, agriculture, infrastructure development, or logging. The once-connected landscape becomes fragmented, creating a mosaic of habitat patches that are separated by areas of altered land use or unsuitable habitat. The process of habitat fragmentation often leads to the loss of habitat quality and connectivity, as well as changes in the spatial configuration and size of habitat patches. This can have significant implications for biodiversity, as it disrupts the natural flow of ecological processes and can result in isolated populations, reduced species diversity, and compromised ecosystem health. Conservation efforts often focus on understanding and mitigating the impacts of habitat fragmentation to maintain or restore the ecological integrity of affected landscapes.} and the intensification of agricultural practices (Saunders et al., 1991; Robinson and Sutherland, 2002; Kleijn et al., 2009). Human activities, especially in human-dominated systems like cultivated lands, have a significant impact on animal and plant communities, altering landscape characteristics (Bretagnolle and Gaba, 2015). Habitat management and agricultural practices can have profound effects on biodiversity, particularly on sensitive groups such as bees and butterflies, which rely on complementary habitats (Holzschuh et al., 2007; Kleijn and Sutherland, 2003).\\
+
+The consequences of these landscape modifications are relevant to biodiversity conservation. The loss of diversified habitats and the homogenization of agricultural landscapes limit the availability of suitable habitats for many species, compromising the abundance, diversity, and persistence of these populations within agroecosystems. Understanding the relationship between habitat management, agricultural practices, and biodiversity is crucial for developing effective conservation strategies. Promoting landscape heterogeneity, preserving semi-natural habitats, and adopting sustainable farming practices are critical to mitigate the negative impacts of agricultural intensification on biodiversity.\\
+
+Among the species groups most affected by this decline, bees have received considerable attention. Numerous studies have highlighted a marked decline in bee populations at various scales, with significant reductions in abundance and species richness (Ghazoul, 2005; Steffan-Dewenter et al., 2005; Biesmeijer et al., 2006; Wratten et al., 2012). These declines are mainly attributed to habitat loss, intensification of agricultural practices, climate change, and loss of host plants (Scheper et al., 2014). Considering the crucial role of bees as pollinators, with an estimated value of over 150 billion euros annually worldwide (Gallmann et al., 2021; Gallai et al., 2009), it is essential to understand the extent of population decline and its correlation with habitat quality.\\
+
+While our understanding of the drivers behind bee population decline and the effectiveness of mitigation measures has improved, there remains a knowledge gap regarding the extent of population decline itself, especially at large spatial scales, and how it relates to habitat quality. Monitoring bee populations on a large scale has been challenging due to the complexity of bee species identification, unlike butterflies, which are monitored in a standardized way in several European countries (van Swaay et al., 2008).\\
+
+Consequently, studies examining bee abundance trends are typically small in scale, while large-scale trends are often based on bee distribution data, leading to underestimations of population trends (Biesmeijer et al., 2006). Efforts are underway to implement standardized monitoring of pollinators in EU member states (Potts et al., 2021). However, due to the cost of in situ monitoring, such programs can only cover a limited proportion of the relevant areas. Therefore, complementary approaches are needed to infer trends in bee populations from other indicators, such as natural habitat cover and species richness.\\
+
+In this context, the present thesis aims to explore the application of remote sensing and Earth observation techniques, combined with machine learning approaches, to assess biodiversity in agricultural areas, urban zones, and natural habitats\footnote{In this thesis, natural habitats refer to areas characterized by the presence of vegetation, such as plants, trees, and other forms of greenery. These zones are often associated with natural or semi-natural environments and can include various types of ecosystems, such as forests, meadows, parks, and gardens. Natural habitats are essential for biodiversity, providing suitable conditions for various plant and animal species. These areas play a crucial role in supporting ecosystem services, including habitat for wildlife, carbon sequestration, air and water purification, and recreational spaces for humans.}. Remote sensing facilitates the acquisition of essential information, particularly multispectral satellite images, crucial for monitoring the physical characteristics of the landscape, including land cover. Specifically, remote sensing and Geographic Information Systems (GIS) have been employed as fundamental tools for landscape management and the analysis of dynamics among urban spaces, agricultural lands, and natural habitats. Through the analysis of these diverse zones and their relationship with bee populations, this thesis seeks to make significant contributions to the understanding of ecological dynamics in these critical areas for biodiversity conservation.
+
+\chapter{MATERIALS AND METHODS} 
+\section{Area of Interest}
+The study area spans approximately 7 × 10 km and is situated in the Southeast region of the Netherlands (Figure 1.1). The landscape within this area presents a variety of land use types, encompassing intensive agriculture, low-intensity farming, urban areas and nature reserves, creating an intricate ecological context for the research.
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.6\textwidth]{1-s2.0-S1470160X23002650-gr1_lrg.jpg}
+  \caption{The study area located in the Southeast of the Netherlands. The 30 plots are indicated by yellow dots. Source: Torresani et al. (2023).}
+  \label{fig:label_immagine}
+\end{figure}
+
+In order to capture a comprehensive representation of grassland variations, 30 specific plots from within the study area were strategically chosen to cover a wide spectrum of land use intensities, ranging from nutrient-poor, yet biodiversity-rich semi-natural grasslands, to heavily fertilized grasslands primarily dedicated to fodder production. For this project, all the 30 selected plots were used.\\
+
+These 30 selected plots are integral components of the EU Showcase project’s experimental biodiversity area network (Kleijn et al., 2022). Detailed information about the EU Showcase project can be found at \texttt{\textbackslash}:\url{https://showcase-project.eu/} \\
+
+The chosen sites are geographically diverse, situated on varying soil types, including loess soils, colluvial clay deposits, and locally lime-rich soils. Furthermore, they span a range of elevations, stretching from 70 to 171 meters above sea level (asl), contributing to a comprehensive understanding of the ecological patterns across different altitude gradients. To ensure an unbiased sampling approach, the potential for spatial clustering of specific grassland types was carefully minimized by selecting semi-natural, extensively used, and intensively used grasslands from various locations within the study area. This systematic approach aimed to mitigate any undue influence of localized factors, enhancing the robustness and reliability of the findings.
+
+\section{The Use of Remote Sensing (RS)}
+The primary motivation behind choosing remote sensing for my thesis project lies in the necessity to attain a comprehensive and systematic understanding of the studied habitats. Remote sensing (RS), involving the capture of images or other measurements of Earth from above, offers a distinctive viewpoint on Earth's occurrences, playing a crucial role in biodiversity and conservation applications. The periodic and repetitive coverage provided by satellite-based RS is particularly valuable for monitoring changes, essential for comprehending trends, and contributes significantly to assessments and conservation management. While historically RS data were often costly and challenging to utilize, changes in the past decade have resulted in vast amounts of global data becoming freely accessible, along with simplified access and utilization.\\
+
+Each remotely sensed Earth image can be viewed as a biological dataset, with individual images telling specific stories and sequences narrating broader tales of temporal changes. This section specifically delves into satellite-based remote sensing due to its global coverage with regular repeat cycles, sometimes offering an almost daily overview of the entire Earth, often at no cost.\\
+
+Concerning the functionality of remote sensing, RS gauges the energy reflected and emitted from the Earth's surface (Figure 1.2).\\
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{R.jpg}
+  \caption{Remote Sensing and Image Processing}
+  \label{fig:label_immagine}
+\end{figure}
+With knowledge of the properties of common surface materials (plants, soils, water bodies), RS provides insights into surface composition. Although certain biodiversity-related situations may not be directly observable with RS, their correlation with observable factors allows remotely sensed observations to serve as a proxy\footnote[3]{proxy refers to a measurable or observable variable that is used as a substitute or indicator for another variable of interest. Proxy variables provide a practical and efficient means to assess certain aspects of a complex system or phenomenon, allowing researchers to gain insights and make informed decisions based on indirect measurements.} for surface activities, given sufficient surface measurements to establish the link. For example, as in the following case study, land cover can be measured, enabling habitat classification and correlation with the presence or absence of a species. This is because terrestrial coverage significantly influences biodiversity in various important ways.\\
+
+Optical data such as that from the Sentinel series of satellites and many others are a measure of the amount of light reflected from Earth’s surface. Typically, the various wavelengths that are reflected are measured in separate “bands”, each of which is stored as a separate image layer. Thus a typical “image” file contains a separate monochromatic image for each band. Creating a natural-looking color image requires the user to combine red, green and blue bands. Other band combinations can also be used and these can highlight different components of interest in the image, often using wavelengths beyond what our eyes can see, particularly in the near-infrared region (NIR).
+The information available for understanding what is happening on the ground increases with the number of bands that a sensor has, but not in a directly proportional way. Thus typical “multi-spectral” sensors with 4 to 20 carefully selected and well-calibrated bands provide a great deal of information, and adding more bands can help with specific issues.\\
+
+Remote sensing is generally most useful when combined with in situ observations, and these are usually required for calibration and for assessing RS accuracy. RS can provide excellent spatial and temporal coverage, for example, though its usefulness may be limited by pixel size which may be too coarse for some applications. On the other hand, in situ measurements are made at very fine spatial scales but tend to be sparse and infrequent, as well as difficult and relatively expensive to collect. Combining RS and in situ observations takes advantage of their complementary features.
+
+
+\subsection{Sentinel 2 for satellite images acquisition}
+Digital satellites essentially fall into two well-defined types: multispectral sensors and hyperspectral sensors. The fundamental difference between these two definitions is primarily based on the level of spectral resolution of the two types of instruments. In fact, when we refer to hyperspectral sensors, we are talking about instruments with a spectral resolution (number of bands into which the spectrum is divided) of the order of a hundred bands, capable of investigating each region of the spectrum over multiple bands. In the case of multispectral sensors, this number does not exceed ten, rarely allowing the analysis of spectral behavior for each region of the spectrum on more than a single band (Simonetti et al., 2014). The vectors used to transport these systems are essentially of three types: satellites, aerial vectors, and ground support systems. Generally, multispectral sensors are paired with satellite vectors, unlike hyperspectral sensors that are mounted on airborne platforms for investigations over large areas.\\
+
+Sentinel-2 is a mission developed by the ESA as part of the Copernicus program to monitor the green areas of the planet and provide support in the management of natural disasters. It consists of two identical satellites, Sentinel-2A and Sentinel-2B. Launched for the first time in June 2015, this system is designed to provide high-resolution images for many spectral bands (Drusch et al., 2012). The satellite is equipped with an opto-electronic multispectral sensor for surveying with a Sentinel-2 resolution of 10 to 60 m in the visible, near-infrared (VNIR), and short-wave infrared (SWIR) spectral zones, including 13 spectral channels. This ensures the capture of differences in vegetation state, including temporal changes, minimizing the impact on the quality of atmospheric photography. The orbit is at an average height of 785 km, and the presence of two satellites in the mission allows repeated surveys every 5 days at the equator and every 2-3 days at middle latitudes.\\
+
+Sentinel-2 data provides services related to the GMES (Global Monitoring for Environment and Security) program, jointly implemented by the European Commission (EC) and the European Space Agency (ESA). These services relate, for example, to land management, agricultural and forestry production, and the monitoring of natural disasters and humanitarian operations. The characteristics of the sensor mounted on board the Sentinel-2 satellites are reported in Table 1.3.\\
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.76\linewidth]{cms_page_media1530image001.png__525.0x426.0_q85_subsampling-2.jpg}  % Sostituisci "nomefileimmagine" con il nome del tuo file immagine
+  \caption{MSI covering 13 spectral bands (443–2190 nm), with a swath width of 290 km and a spatial resolution of 10 m (four visible and near-infrared bands), 20 m (six red edge and shortwave infrared bands) and 60 m (three atmospheric correction bands. Source: Satellite Imaging Corporation}
+  \label{fig:label_immagine}
+\end{figure}
+
+The selection of Sentinel-2 for integration into my thesis is underpinned by compelling reasons. The extensive spectral bands featured in Sentinel-2 satellites afford a high degree of precision in the identification of land cover classes, particularly with respect to vegetation. The strategic inclusion of infrared (Red Edge) bands enhances the capacity for deriving vegetation indices and conducting assessments of agricultural crops (Clevers and Gitelson, 2013). Moreover, the unfettered accessibility of Sentinel-2 images within the Copernicus program significantly bolsters their suitability for undertaking comprehensive multi-temporal monitoring of landscape physical characteristics, as elucidated in studies such as Escolà et al. (2017). This judicious selection aligns with the program's objectives and ensures a robust foundation for my research endeavors.
+
+\section{The Geographic information system (GIS)}
+Remote sensing images are spatial data and require the use of a Geographic Information System (GIS) for visualization and processing. 
+
+A Geographic Information System (GIS) is a system designed to capture, store, manipulate, analyze, manage, and present all types of geographical data. The key word to this technology is Geography, this means that some portion of the data is spatial. In other words, data that is in some way referenced to locations on the earth\footnote[4]{University of Wisconin-Madison. Mapping and Geographic Information Systems (GIS) : What is GIS? url: https://researchguides.library.wisc.edu/GIS}\\
+Geographic information systems (GIS) have found widespread adoption in public administration, industry and a multitude of research disciplines thanks to their capabilities to integrate heterogeneous digital data and to provide data analysis, as well as their visualization functionality (Star, J., Estes, J. E., 1990).\\
+
+The software chosen for my project is QuantumGIS (QGIS), one of the most well-known open-source Geographic Information Systems (GIS) software. QGIS is released under the GNU General Public License and is an official project of the Open Source Geospatial Foundation (OSGeo). It is available for platforms such as Linux, Unix, Mac OSX, Windows, and Android, supporting various vector formats, raster formats, databases, and functionalities. For further information, you can visit the official website: \url{www.qgis.org.}.\\
+
+The initial goal of the QGIS project was to create a spatial data viewer. The free availability of satellite data such as Landsat (United States Geological Survey, 2019), and Sentinel-2 (European Space Agency, 2018)) extended the use of remote sensing in various fields such as urban planning, agriculture, environmental monitoring, etc. (Nink et al., 2019; Pesaresi et al., 2016; Rogan and Chen, 2004; Weiss et al., 2020). 
+The development of open source GIS and processing software can foster environmental monitoring, which can be performed with no cost for software and remote sensing images considering the free data availability. \\
+
+The use of QGIS software was necessary to proceed with the manual interpretation of the images obtained from the Sentinel 2 satellite, serving as the foundation for the subsequent classification activity, which will be explained in the following chapters. Thanks to QGIS, it was possible for me to delineate distinct polygons for each class, namely natural habitat, urban areas and agricultural areas (Figure 1.4).
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\linewidth]{qgis-bin_qQb5WscFn5.png}  % Sostituisci "nomefileimmagine" con il nome del tuo file immagine
+  \caption{Example of manually delineated polygons}
+  \label{fig:label_immagine}
+\end{figure}
+The delineation of polygons was carried out within a buffer area of 250 m (Figure 1.5). 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{qgis-bin_Ytb5B7yteO.png}  % Sostituisci "nomefileimmagine" con il nome del tuo file immagine
+  \caption{250-meter-wide buffer generated from a central point}
+  \label{fig:label_immagine}
+\end{figure}\\
+
+The use of QGIS software in this manual interpretation activity offered several advantages that justified the decision to invest the effort and time required for the meticulous process of manual interpretation. The versatility of the platform in handling spatial data, along with its range of tools designed for manual interpretation tasks, made it an ideal choice for this task. By leveraging QGIS, it was possible to meticulously delineate the polygons and select points within them, ensuring precision and accuracy in my interpretation process. Additionally, QGIS's ability to integrate various data sources and layers facilitated the synthesis of multiple pieces of spatial information, further enhancing the reliability of my interpretations.
+
+
+\section{R and Random Forest Machine Learning}
+Examining the realm of open-source software choices, R software stands out as one of the most extensively employed languages for statistical analysis and modeling (R Core Team, 2023).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
