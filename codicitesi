@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+
+\geometry{
+  top=1in,
+  bottom=1in,
+  left=1in,
+  right=1in
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{OIP.jpg} % Sostituisci con il tuo logo dell'università
+    \vspace{1cm}
+
+
+
+    \textbf{\Large Department of Biological, Geological and Environmental Sciences Sciences and Management of Nature} \\
+    \vspace{2cm}
+
+    \textbf{\Huge Harnessing Satellite Remote Sensing for Biodiversity Richness Monitoring} \\
+    \vspace{3cm}
+
+    \textbf{\large Candidate: Diesi Roberta} \\
+    \textbf{\large Student ID: 1052649} \\
+    \vspace{1cm}
+
+    \textbf{\large Supervisor: Rocchini Duccio} \\
+    \textbf{\large Co-Supervisor: Torresani Michele} \\
+    \vspace{2cm}
+
+    \textbf{\large Anno Accademico 2022-2023} \\
+  \end{center}
+\end{titlepage}
+
+\end{document}
